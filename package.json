@@ -1,0 +1,11 @@
+{
+  "scripts": {
+    "tailwindcss-watch": "npx tailwindcss -i ./route_planning/static/css/input.css -o ./route_planning/static/css/output.css --watch ",
+    "tailwindcss-build": "npx tailwindcss -i ./route_planning/static/css/input.css -o ./route_planning/static/css/output.css --minify "
+  },
+  "devDependencies": {
+    "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.13",
+    "tailwindcss": "^3.4.4"
+  }
+}

@@ -5,6 +5,7 @@ description = "A route planning application built with Flask, Tailwind CSS, and 
 authors = [{ name = "Madalin Popa", email= "madalin@coderustle.ro"}]
 dependencies = [
     "flask>=3.0.3",
+    "flask-wtf>=1.2.1",
     "SQLAlchemy>=2.0.31",
     "googlemaps>=4.10.0",
     "pdfkit>=1.0.0"

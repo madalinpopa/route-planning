@@ -13,7 +13,6 @@ def create_app(test_config=None):
     if test_config is None:
         env_config = os.environ.get("FLASK_ENV", "development")
         app.config.from_object(config[env_config])
-
     else:
         app.config.from_mapping(test_config)
     try:
@@ -25,5 +24,9 @@ def create_app(test_config=None):
         from .db import init_db
 
         init_db()
+
+    from . import auth
+
+    app.register_blueprint(auth.auth)
 
     return app
