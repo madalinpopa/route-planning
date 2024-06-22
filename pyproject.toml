@@ -1,0 +1,18 @@
+[project]
+name = "route_planning"
+version = "0.1.0"
+description = "A route planning application built with Flask, Tailwind CSS, and Alpine.js"
+authors = [{ name = "Madalin Popa", email= "madalin@coderustle.ro"}]
+dependencies = [
+    "flask>=3.0.3",
+    "SQLAlchemy>=2.0.31",
+    "googlemaps>=4.10.0",
+    "pdfkit>=1.0.0"
+]
+
+[project.optional-dependencies]
+dev = ["black", "pytest", "ruff"]
+
+[build-system]
+requires = ["flit_core<4"]
+build-backend = "flit_core.buildapi"
