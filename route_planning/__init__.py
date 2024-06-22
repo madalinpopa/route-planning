@@ -1,5 +1,6 @@
 import os
 from flask import Flask
+from .config import config
 
 
 def create_app(test_config=None):
@@ -10,10 +11,11 @@ def create_app(test_config=None):
     )
 
     if test_config is None:
-        app.config.from_pyfile("config.py", silent=True)
+        env_config = os.environ.get("FLASK_ENV", "development")
+        app.config.from_object(config[env_config])
+
     else:
         app.config.from_mapping(test_config)
-
     try:
         os.makedirs(app.instance_path)
     except OSError:
