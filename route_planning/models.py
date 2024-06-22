@@ -1,18 +1,13 @@
-from sqlalchemy import Column, Integer, String
-from route_planning.db import Base
+from sqlalchemy import Integer, String
+from sqlalchemy.orm import Mapped, mapped_column
+from . import db
 
 
-class User(Base):
+class User(db.Model):
     __tablename__ = "users"
-    id = Column(Integer, primary_key=True)
-    username = Column(String, unique=True)
-    password = Column(String)
-    email = Column(String, unique=True)
-
-    def __init__(self, username, password, email):
-        self.username = username
-        self.password = password
-        self.email = email
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    username: Mapped[str] = mapped_column(String, unique=True)
+    email: Mapped[str] = mapped_column(String, unique=True)
 
     def __repr__(self):
         return f"<User {self.username}>"
