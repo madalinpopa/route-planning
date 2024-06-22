@@ -1,13 +1,13 @@
 from route_planning.db import db_session
 from . import create_app
-
+from flask import render_template
 
 app = create_app()
 
 
 @app.route("/")
 def index():
-    return "Hello, World!"
+    return render_template("index.html")
 
 
 @app.teardown_appcontext
