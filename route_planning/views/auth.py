@@ -12,10 +12,10 @@ from flask import (
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 from route_planning import db
-from models import User
+from ..models import User
 
-from forms import UserRegistrationForm
-from forms import LoginForm
+from ..forms import UserRegistrationForm
+from ..forms import LoginForm
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 

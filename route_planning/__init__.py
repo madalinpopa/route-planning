@@ -33,7 +33,7 @@ def create_app(test_config=None):
         db.create_all()
         migrate.init_app(app, db)
 
-    from views import auth, main
+    from .views import auth, main
 
     app.register_blueprint(main.main)
     app.register_blueprint(auth.auth)
