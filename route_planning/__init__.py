@@ -1,8 +1,13 @@
 import os
-from flask import Flask, render_template
+
+
+from flask import Flask
+from flask.cli import AppGroup
+
 from flask_sqlalchemy import SQLAlchemy
-from .config import config
 from sqlalchemy.orm import DeclarativeBase
+
+from .config import config
 from flask_migrate import Migrate
 
 
@@ -12,6 +17,8 @@ class Base(DeclarativeBase):
 
 db = SQLAlchemy(model_class=Base)
 migrate = Migrate()
+
+user_cli = AppGroup("user")
 
 
 def create_app(test_config=None):

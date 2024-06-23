@@ -8,6 +8,7 @@ class User(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     username: Mapped[str] = mapped_column(String, unique=True)
     email: Mapped[str] = mapped_column(String, unique=True)
+    password: Mapped[str] = mapped_column(String)
 
     def __repr__(self):
         return f"<User {self.username}>"

@@ -1,5 +1,7 @@
 import functools
 
+import click
+import sqlalchemy
 from flask import (
     Blueprint,
     g,
@@ -17,7 +19,7 @@ from ..models import User
 from ..forms import UserRegistrationForm
 from ..forms import LoginForm
 
-auth = Blueprint("auth", __name__, url_prefix="/auth")
+auth = Blueprint("auth", __name__, url_prefix="/auth", cli_group="user")
 
 
 def login_required(view):
@@ -69,3 +71,40 @@ def register():
 
         return redirect(url_for("auth.login"))
     return render_template("auth/register.html", form=form)
+
+
+@auth.cli.command("create")
+@click.argument("username")
+@click.argument("email")
+@click.argument("password")
+def create_user(username, email, password):
+    """Create a new user."""
+    hashed_password = generate_password_hash(password)
+    new_user = User(username=username, email=email, password=hashed_password)
+    try:
+        db.session.add(new_user)
+        db.session.commit()
+        click.echo(f"User {username} created successfully.")
+    except sqlalchemy.exc.IntegrityError:
+        click.echo(f"User {username} already exists.")
+
+
+@auth.cli.command("delete")
+@click.argument("username")
+def delete_user(username):
+    """Delete a user."""
+    user = User.query.filter_by(username=username).first()
+    if user:
+        db.session.delete(user)
+        db.session.commit()
+        click.echo(f"User {username} deleted successfully.")
+    else:
+        click.echo(f"User {username} not found.")
+
+
+@auth.cli.command("list")
+def list_users():
+    """List all users."""
+    users = User.query.all()
+    for user in users:
+        click.echo(f"{user.username} - {user.email}")
