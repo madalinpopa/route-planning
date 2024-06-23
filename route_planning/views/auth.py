@@ -1,10 +1,10 @@
 from flask import Blueprint, render_template, redirect, url_for, flash, request, session
 from werkzeug.security import generate_password_hash, check_password_hash
-from . import db
-from .models import User
+from route_planning import db
+from models import User
 
-from .forms import UserRegistrationForm
-from .forms import LoginForm
+from forms import UserRegistrationForm
+from forms import LoginForm
 
 auth = Blueprint("auth", __name__, url_prefix="/auth")
 
