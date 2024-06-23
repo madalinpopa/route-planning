@@ -78,7 +78,7 @@
                 <ul role="list" class="-mx-2 space-y-1">
                   <li>
                     <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-                    <a hx-get="{{ url_for('company.details') }}" hx-target="#main-content"
+                    <a hx-get="{{ url_for('company.details') }}" hx-target="#main-content" id="mobile-company-menu-item"
                        class="group flex gap-x-3 rounded-md bg-gray-800 p-2 text-sm font-semibold leading-6 text-white">
                       <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                            stroke="currentColor" aria-hidden="true">
@@ -89,7 +89,7 @@
                     </a>
                   </li>
                   <li>
-                    <a hx-get="{{ url_for('vehicle.vehicle_list') }}" hx-target="#main-content"
+                    <a hx-get="{{ url_for('vehicle.vehicle_list') }}" hx-target="#main-content" id="mobile-vehicles-menu-item"
                        class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
                       <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                            stroke="currentColor" aria-hidden="true">
@@ -100,7 +100,7 @@
                     </a>
                   </li>
                   <li>
-                    <a hx-get="{{ url_for('driver.driver_list') }}" hx-target="#main-content"
+                    <a hx-get="{{ url_for('driver.driver_list') }}" hx-target="#main-content" id="mobile-drivers-menu-item"
                        class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
                       <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                            stroke="currentColor" aria-hidden="true">
@@ -111,7 +111,7 @@
                     </a>
                   </li>
                   <li>
-                    <a hx-get="{{ url_for('route.route_list') }}" hx-target="#main-content"
+                    <a hx-get="{{ url_for('route.route_list') }}" hx-target="#main-content" id="mobile-route-menu-item"
                        class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
                       <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                            stroke="currentColor" aria-hidden="true">
@@ -143,7 +143,7 @@
             <ul role="list" class="-mx-2 space-y-1">
               <li>
                 <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
-                <a hx-get="{{ url_for('company.details') }}" hx-target="#main-content"
+                <a hx-get="{{ url_for('company.details') }}" hx-target="#main-content" id="desktop-company-menu-item"
                    class="group flex gap-x-3 rounded-md bg-gray-800 p-2 text-sm font-semibold leading-6 text-white">
                   <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                        stroke="currentColor" aria-hidden="true">
@@ -154,7 +154,7 @@
                 </a>
               </li>
               <li>
-                <a hx-get="{{ url_for('vehicle.vehicle_list') }}" hx-target="#main-content"
+                <a hx-get="{{ url_for('vehicle.vehicle_list') }}" hx-target="#main-content" id="desktop-vehicles-menu-item"
                    class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
                   <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                        stroke="currentColor" aria-hidden="true">
@@ -165,7 +165,7 @@
                 </a>
               </li>
               <li>
-                <a hx-get="{{ url_for('driver.driver_list') }}" hx-target="#main-content"
+                <a hx-get="{{ url_for('driver.driver_list') }}" hx-target="#main-content" id="desktop-drivers-menu-item"
                    class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
                   <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                        stroke="currentColor" aria-hidden="true">
@@ -176,7 +176,7 @@
                 </a>
               </li>
               <li>
-                <a hx-get="{{ url_for('route.route_list') }}" hx-target="#main-content"
+                <a hx-get="{{ url_for('route.route_list') }}" hx-target="#main-content" id="desktop-route-menu-item"
                    class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
                   <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                        stroke="currentColor" aria-hidden="true">
