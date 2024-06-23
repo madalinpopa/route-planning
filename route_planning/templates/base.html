@@ -16,13 +16,6 @@
 
 <script src="{{ url_for('static',filename='js/htmx.min.js') }}"></script>
 <script src="{{ url_for('static',filename='js/alpine.min.js') }}"></script>
-<script>
-    function handleConfigRequest(event) {
-        event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
-        document.body.removeEventListener('htmx:configRequest', handleConfigRequest);
-    }
 
-    document.body.addEventListener('htmx:configRequest', handleConfigRequest);
-</script>
 </body>
 </html>
