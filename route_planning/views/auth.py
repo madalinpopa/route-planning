@@ -40,13 +40,27 @@ def load_logged_in_user():
     if user_id is None:
         g.user = None
     else:
-        g.user = db.query(User).filter_by(id=user_id).first()
+        g.user = User.query.filter_by(id=user_id).first()
 
 
 @auth.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and check_password_hash(user.password, form.password.data):
+            session.clear()
+            session["user_id"] = user.id
+            return redirect(url_for("main.index"))
+        else:
+            flash("Invalid username or password")
     return render_template("auth/login.html", form=form)
+
+
+@auth.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("main.index"))
 
 
 @auth.route("/register", methods=["GET", "POST"])
