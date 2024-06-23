@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, TextAreaField
 from wtforms.validators import DataRequired
 
 
@@ -15,9 +15,9 @@ class UserRegistrationForm(FlaskForm):
 
 
 class CompanyForm(FlaskForm):
-    vat = StringField("VAT", validators=[DataRequired()])
-    name = StringField("Name", validators=[DataRequired()])
-    address = StringField("Address", validators=[DataRequired()])
+    vat = StringField("VAT Number", validators=[DataRequired()])
+    name = StringField("Company Name", validators=[DataRequired()])
+    address = TextAreaField("Address")
 
 
 class DriverForm(FlaskForm):
