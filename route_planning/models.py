@@ -20,12 +20,14 @@ class Company(db.Model):
     vat: Mapped[str] = mapped_column(String, unique=True, nullable=False)
     name: Mapped[str] = mapped_column(String, nullable=False)
     address: Mapped[str] = mapped_column(String, nullable=True)
+    drivers = db.relationship("Driver", backref="company")
+    vehicles = db.relationship("Vehicle", backref="company")
 
     def __repr__(self):
         return f"<Company {self.name}>"
 
 
-class Drivers(db.Model):
+class Driver(db.Model):
     __tablename__ = "drivers"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String, nullable=False)
@@ -33,7 +35,8 @@ class Drivers(db.Model):
     company_id: Mapped[int] = mapped_column(
         Integer, db.ForeignKey("companies.id"), nullable=False
     )
-    company = db.relationship("Company", backref="drivers")
+
+    routes = db.relationship("Route", backref="driver")
 
     def __repr__(self):
         return f"<Driver {self.name} {self.surname}>"
@@ -50,7 +53,7 @@ class Vehicle(db.Model):
     company_id: Mapped[int] = mapped_column(
         Integer, db.ForeignKey("companies.id"), nullable=False
     )
-    company = db.relationship("Company", backref="vehicles")
+    routes = db.relationship("Route", backref="vehicle")
 
     def __repr__(self):
         return f"<Vehicle {self.plate}>"
@@ -69,12 +72,10 @@ class Route(db.Model):
     driver_id: Mapped[int] = mapped_column(
         Integer, db.ForeignKey("drivers.id"), nullable=False
     )
-    driver = db.relationship("Drivers", backref="routes")
 
     vehicle_id: Mapped[int] = mapped_column(
         Integer, db.ForeignKey("vehicles.id"), nullable=False
     )
-    vehicle = db.relationship("Vehicle", backref="routes")
 
     def __repr__(self):
         return f"<Route {self.date}>"
