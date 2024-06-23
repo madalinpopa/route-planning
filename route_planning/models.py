@@ -26,6 +26,10 @@ class Company(db.Model):
     def __repr__(self):
         return f"<Company {self.name}>"
 
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
 
 class Driver(db.Model):
     __tablename__ = "drivers"
