@@ -40,9 +40,13 @@ def create_app(test_config=None):
         db.create_all()
         migrate.init_app(app, db)
 
-    from .views import auth, main
+    from .views import auth, main, company, driver, route, vehicle
 
     app.register_blueprint(main.main)
     app.register_blueprint(auth.auth)
+    app.register_blueprint(company.company)
+    app.register_blueprint(driver.driver)
+    app.register_blueprint(route.route)
+    app.register_blueprint(vehicle.vehicle)
 
     return app
