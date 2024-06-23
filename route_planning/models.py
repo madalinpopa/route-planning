@@ -1,4 +1,4 @@
-from sqlalchemy import Integer, String
+from sqlalchemy import Integer, String, Float, Date
 from sqlalchemy.orm import Mapped, mapped_column
 from route_planning import db
 
@@ -12,3 +12,69 @@ class User(db.Model):
 
     def __repr__(self):
         return f"<User {self.username}>"
+
+
+class Company(db.Model):
+    __tablename__ = "companies"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    vat: Mapped[str] = mapped_column(String, unique=True, nullable=False)
+    name: Mapped[str] = mapped_column(String, nullable=False)
+    address: Mapped[str] = mapped_column(String, nullable=True)
+
+    def __repr__(self):
+        return f"<Company {self.name}>"
+
+
+class Drivers(db.Model):
+    __tablename__ = "drivers"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    name: Mapped[str] = mapped_column(String, nullable=False)
+    surname: Mapped[str] = mapped_column(String, nullable=False)
+    company_id: Mapped[int] = mapped_column(
+        Integer, db.ForeignKey("companies.id"), nullable=False
+    )
+    company = db.relationship("Company", backref="drivers")
+
+    def __repr__(self):
+        return f"<Driver {self.name} {self.surname}>"
+
+
+class Vehicle(db.Model):
+    __tablename__ = "vehicles"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    plate: Mapped[str] = mapped_column(String, unique=True, nullable=False)
+    brand: Mapped[str] = mapped_column(String, nullable=False)
+    model: Mapped[str] = mapped_column(String, nullable=False)
+    combustible: Mapped[str] = mapped_column(String, nullable=False)
+    consumption: Mapped[float] = mapped_column(Float, nullable=False)
+    company_id: Mapped[int] = mapped_column(
+        Integer, db.ForeignKey("companies.id"), nullable=False
+    )
+    company = db.relationship("Company", backref="vehicles")
+
+    def __repr__(self):
+        return f"<Vehicle {self.plate}>"
+
+
+class Route(db.Model):
+    __tablename__ = "routes"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    date: Mapped[str] = mapped_column(Date, nullable=False)
+    start_km: Mapped[float] = mapped_column(Float, nullable=False)
+    end_km: Mapped[float] = mapped_column(Float, nullable=False)
+    start_from: Mapped[str] = mapped_column(String, nullable=False)
+    end_to: Mapped[str] = mapped_column(String, nullable=False)
+    distance: Mapped[float] = mapped_column(Float, nullable=False)
+
+    driver_id: Mapped[int] = mapped_column(
+        Integer, db.ForeignKey("drivers.id"), nullable=False
+    )
+    driver = db.relationship("Drivers", backref="routes")
+
+    vehicle_id: Mapped[int] = mapped_column(
+        Integer, db.ForeignKey("vehicles.id"), nullable=False
+    )
+    vehicle = db.relationship("Vehicle", backref="routes")
+
+    def __repr__(self):
+        return f"<Route {self.date}>"
