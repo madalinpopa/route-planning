@@ -14,6 +14,11 @@ def vehicle_list():
         page=page, per_page=current_app.config["ITEMS_PER_PAGE"], error_out=False
     )
     vehicles = pagination.items
+    if request.headers.get("HX-Request") == "true":
+        return render_template(
+            "vehicle/partials/list.html", vehicles=vehicles, pagination=pagination
+        )
+
     return render_template(
         "vehicle/list.html", vehicles=vehicles, pagination=pagination
     )
