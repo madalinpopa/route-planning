@@ -46,6 +46,18 @@ class Driver(db.Model):
     def __repr__(self):
         return f"<Driver {self.name} {self.surname}>"
 
+    def save(self) -> None:
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self) -> None:
+        try:
+            db.session.delete(self)
+            db.session.commit()
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            print(f"Error deleting vehicle: {e}")
+
 
 class Vehicle(db.Model):
     __tablename__ = "vehicles"
