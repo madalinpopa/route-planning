@@ -23,7 +23,7 @@ class CompanyForm(FlaskForm):
 class DriverForm(FlaskForm):
     name = StringField("Name", validators=[DataRequired()])
     surname = StringField("Surname", validators=[DataRequired()])
-    email = StringField("Email", validators=[DataRequired()])
+    email = StringField("Email", validators=[DataRequired(), Email()])
     phone = StringField("Phone", validators=[DataRequired()])
 
 
