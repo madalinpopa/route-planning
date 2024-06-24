@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField
-from wtforms.validators import DataRequired
+from wtforms import StringField, TextAreaField, SelectField
+from wtforms.validators import DataRequired, Email, ValidationError
 
 
 class LoginForm(FlaskForm):
@@ -11,7 +11,7 @@ class LoginForm(FlaskForm):
 class UserRegistrationForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = StringField("Password", validators=[DataRequired()])
-    email = StringField("Email", validators=[DataRequired()])
+    email = StringField("Email", validators=[DataRequired(), Email()])
 
 
 class CompanyForm(FlaskForm):
@@ -25,22 +25,28 @@ class DriverForm(FlaskForm):
     surname = StringField("Surname", validators=[DataRequired()])
     email = StringField("Email", validators=[DataRequired()])
     phone = StringField("Phone", validators=[DataRequired()])
-    company = StringField("Company", validators=[DataRequired()])
 
 
 class VehicleForm(FlaskForm):
-    registration = StringField("Registration", validators=[DataRequired()])
-    make = StringField("Make", validators=[DataRequired()])
+    plate = StringField("Plate", validators=[DataRequired()])
+    brand = StringField("Brand", validators=[DataRequired()])
     model = StringField("Model", validators=[DataRequired()])
-    year = StringField("Year", validators=[DataRequired()])
-    company = StringField("Company", validators=[DataRequired()])
+    combustible = SelectField(
+        "Combustible", choices=("Motorina", "Benzina"), validators=[DataRequired()]
+    )
+    consumption = StringField("Consumption", validators=[DataRequired()])
+
+    def validate_consumption(self, field):
+        try:
+            float(field.data)
+        except ValueError:
+            raise ValidationError("Consumption must be a number")
 
 
 class RouteForm(FlaskForm):
     start = StringField("Start", validators=[DataRequired()])
     end = StringField("End", validators=[DataRequired()])
     distance = StringField("Distance", validators=[DataRequired()])
-    company = StringField("Company", validators=[DataRequired()])
     price = StringField("Price", validators=[DataRequired()])
     date = StringField("Date", validators=[DataRequired()])
     time = StringField("Time", validators=[DataRequired()])
