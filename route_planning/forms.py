@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField
-from wtforms.validators import DataRequired
+from wtforms.validators import DataRequired, Email
 
 
 class LoginForm(FlaskForm):
@@ -11,7 +11,7 @@ class LoginForm(FlaskForm):
 class UserRegistrationForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = StringField("Password", validators=[DataRequired()])
-    email = StringField("Email", validators=[DataRequired()])
+    email = StringField("Email", validators=[Email()])
 
 
 class CompanyForm(FlaskForm):
@@ -25,22 +25,20 @@ class DriverForm(FlaskForm):
     surname = StringField("Surname", validators=[DataRequired()])
     email = StringField("Email", validators=[DataRequired()])
     phone = StringField("Phone", validators=[DataRequired()])
-    company = StringField("Company", validators=[DataRequired()])
 
 
 class VehicleForm(FlaskForm):
-    registration = StringField("Registration", validators=[DataRequired()])
-    make = StringField("Make", validators=[DataRequired()])
+    plate = StringField("Plate", validators=[DataRequired()])
+    brand = StringField("Brand", validators=[DataRequired()])
     model = StringField("Model", validators=[DataRequired()])
-    year = StringField("Year", validators=[DataRequired()])
-    company = StringField("Company", validators=[DataRequired()])
+    combustible = StringField("Combustible", validators=[DataRequired()])
+    consumption = StringField("Consumption", validators=[DataRequired()])
 
 
 class RouteForm(FlaskForm):
     start = StringField("Start", validators=[DataRequired()])
     end = StringField("End", validators=[DataRequired()])
     distance = StringField("Distance", validators=[DataRequired()])
-    company = StringField("Company", validators=[DataRequired()])
     price = StringField("Price", validators=[DataRequired()])
     date = StringField("Date", validators=[DataRequired()])
     time = StringField("Time", validators=[DataRequired()])
