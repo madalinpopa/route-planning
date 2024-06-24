@@ -51,7 +51,7 @@ def login():
         if user and check_password_hash(user.password, form.password.data):
             session.clear()
             session["user_id"] = user.id
-            return redirect(url_for("main.index"))
+            return redirect(url_for("company.details"))
         else:
             flash("Invalid username or password")
     return render_template("auth/login.html", form=form)
@@ -60,7 +60,7 @@ def login():
 @auth.route("/logout")
 def logout():
     session.clear()
-    return redirect(url_for("main.index"))
+    return redirect(url_for("auth.login"))
 
 
 @auth.route("/register", methods=["GET", "POST"])
