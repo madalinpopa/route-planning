@@ -12,7 +12,8 @@
           <p class="mt-2 text-sm text-gray-700">A list of all the vehicles in used to add routes.</p>
         </div>
         <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-          <button type="button"
+          <button hx-get="{{ url_for('vehicle.vehicle_add') }}" hx-target="#vehicle-page-content" id="btn-add-vehicle"
+                  type="button"
                   class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             Add vehicle
           </button>
@@ -21,7 +22,7 @@
       <div class="mt-8 flow-root">
         <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
-            <div class="relative">
+            <div id="vehicle-page-content" class="relative">
               <!-- Selected row actions, only show when rows are selected. -->
               <!-- <div class="absolute top-0 left-14 flex h-12 items-center space-x-3 bg-white sm:left-12"> -->
               <!--   <button type="button" class="inline-flex items-center rounded bg-white px-2 py-1 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-white">Bulk edit</button> -->
