@@ -14,7 +14,6 @@ def details():
         db.session.add(new_company)
         db.session.commit()
     if request.headers.get("HX-Request") == "true":
-        print("HX-Request")
         return render_template("company/partials/details.html", company=default_company)
     return render_template("company/details.html", company=default_company)
 
