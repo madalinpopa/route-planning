@@ -9,6 +9,13 @@ company = Blueprint("company", __name__, url_prefix="/company")
 @company.route("/details", methods=["GET"])
 def details():
     default_company = Company.query.first()
+    if default_company is None:
+        new_company = Company(vat="123456789", name="Company Name")
+        db.session.add(new_company)
+        db.session.commit()
+    if request.headers.get("HX-Request") == "true":
+        print("HX-Request")
+        return render_template("company/partials/details.html", company=default_company)
     return render_template("company/details.html", company=default_company)
 
 
