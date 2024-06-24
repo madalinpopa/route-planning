@@ -29,3 +29,13 @@ db-migrate:
 
 db-upgrade:
     flask db upgrade
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#  Dev commands
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+run:
+    flask run
+
+tailwindcss:
+    npm run tailwindcss-watch
