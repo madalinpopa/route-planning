@@ -35,7 +35,7 @@ db-upgrade:
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 run:
-    flask run
+    flask run --debug
 
 tailwindcss:
     npm run tailwindcss-watch
