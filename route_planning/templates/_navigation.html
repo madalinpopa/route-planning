@@ -1,12 +1,12 @@
-<nav class="flex flex-1 flex-col" x-data="{ currentUrl: window.location.pathname }" x-init="window.addEventListener('htmx:afterSwap', () => { currentUrl = window.location.pathname })">
+<nav class="flex flex-1 flex-col" x-data="{ currentUrl: window.location.pathname }"
+  x-init="window.addEventListener('htmx:afterSwap', () => { currentUrl = window.location.pathname })">
   <ul role="list" class="flex flex-1 flex-col gap-y-7">
     <li>
       <ul role="list" class="-mx-2 space-y-1">
         <li>
           <!-- Current: "bg-gray-800 text-white", Default: "text-gray-400 hover:text-white hover:bg-gray-800" -->
           <a hx-get="{{ url_for('company.details') }}" hx-target="#main-content" hx-push-url="true"
-            hx-select="#company-details" id="menu-item-company"
-            :class="{ 'bg-gray-800 text-white': currentUrl.includes('/company')}"
+            hx-select="#company-details" :class="{ 'bg-gray-800 text-white': currentUrl.includes('/company')}"
             class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
             <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
               aria-hidden="true">
@@ -19,7 +19,7 @@
         </li>
         <li>
           <a hx-get="{{ url_for('vehicle.vehicle_list') }}" hx-target="#main-content" hx-push-url="true"
-            id="menu-item-vehicle" :class="{ 'bg-gray-800 text-white': currentUrl.includes('/vehicle')}"
+            hx-select="#vehicle-page" :class="{ 'bg-gray-800 text-white': currentUrl.includes('/vehicle')}"
             class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
             <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
               aria-hidden="true">
@@ -31,8 +31,8 @@
           </a>
         </li>
         <li>
-          <a hx-get="{{ url_for('driver.driver_list') }}" hx-target="#main-content" hx-push-url="true" hx-select="#driver-page"
-            :class="{ 'bg-gray-800 text-white': currentUrl.includes('/driver') }"
+          <a hx-get="{{ url_for('driver.driver_list') }}" hx-target="#main-content" hx-push-url="true"
+            hx-select="#driver-page" :class="{ 'bg-gray-800 text-white': currentUrl.includes('/driver') }"
             class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
             <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
               aria-hidden="true">
@@ -44,7 +44,7 @@
           </a>
         </li>
         <li>
-          <a hx-get="{{ url_for('route.route_list') }}" hx-target="#main-content" hx-push-url="true" id="menu-item-route"
+          <a hx-get="{{ url_for('route.route_list') }}" hx-target="#main-content" hx-push-url="true" hx-select="#route-page"
             :class="{ 'bg-gray-800 text-white': currentUrl.includes('/route') }"
             class="group flex gap-x-3 rounded-md p-2 text-sm font-semibold leading-6 text-gray-400 hover:bg-gray-800 hover:text-white">
             <svg class="h-6 w-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
