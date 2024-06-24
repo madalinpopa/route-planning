@@ -1,1 +1,43 @@
-<h1>Add vehicle</h1>
+<form class="divide-y divide-gray-100" id="vehicle-add-form">
+  {{ form.csrf_token }}
+  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <label for="plate" class="block text-sm font-medium leading-6 text-gray-900">{{ form.plate.label }}</label>
+    <div class="mt-2">
+      {{ form.plate(id="plate", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+    </div>
+  </div>
+  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <label for="brand" class="block text-sm font-medium leading-6 text-gray-900">{{ form.brand.label }}</label>
+    <div class="mt-2">
+      {{ form.brand(id="brand", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+    </div>
+  </div>
+  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <label for="model" class="block text-sm font-medium leading-6 text-gray-900">{{ form.model.label }}</label>
+    <div class="mt-2">
+      {{ form.brand(id="model", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+    </div>
+  </div>
+  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <label for="combustible" class="block text-sm font-medium leading-6 text-gray-900">{{ form.combustible.label }}</label>
+    <div class="mt-2">
+      {{ form.combustible(id="combustible", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+    </div>
+  </div>
+  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+    <label for="consumption" class="block text-sm font-medium leading-6 text-gray-900">{{ form.consumption.label }}</label>
+    <div class="mt-2">
+      {{ form.consumption(id="consumption", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+    </div>
+  </div>
+
+  <button id="btn-edit-company-details" hx-swap-oob="true"
+          type="submit" hx-target="#main-content"
+          hx-post="{{ url_for('vehicle.vehicle_add') }}" hx-include="#vehicle-add-form"
+          class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+    Save
+  </button>
+</form>
+
+
+
