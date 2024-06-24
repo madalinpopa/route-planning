@@ -9,6 +9,7 @@ from sqlalchemy.orm import DeclarativeBase
 
 from .config import config
 from flask_migrate import Migrate
+from flask_wtf.csrf import CSRFProtect
 
 
 class Base(DeclarativeBase):
@@ -17,6 +18,7 @@ class Base(DeclarativeBase):
 
 db = SQLAlchemy(model_class=Base)
 migrate = Migrate()
+csrf = CSRFProtect()
 
 user_cli = AppGroup("user")
 
@@ -35,6 +37,7 @@ def create_app(test_config=None):
         pass
 
     db.init_app(app)
+    csrf.init_app(app)
 
     with app.app_context():
         db.create_all()
