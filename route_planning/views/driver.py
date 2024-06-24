@@ -33,15 +33,22 @@ def driver_add():
     return render_template("driver/add.html", form=form)
 
 
-@driver.route("/edit/<int:driver_id>")
+@driver.route("/edit/<int:driver_id>", methods=["GET", "POST"])
 def driver_edit(driver_id):
     driver_obj = Driver.query.get(driver_id)
     if driver_obj is None:
         return redirect(url_for("driver.driver_list"))
-    return render_template("driver/edit.html", driver=driver_obj)
+
+    form = DriverForm(obj=driver_obj)
+    if request.method == "POST":
+        if form.validate_on_submit():
+            form.populate_obj(driver_obj)
+            driver_obj.save()
+            return redirect(url_for("driver.driver_list"))
+    return render_template("driver/edit.html", form=form, driver=driver_obj)
 
 
-@driver.route("/delete/<int:driver_id>")
+@driver.route("/delete/<int:driver_id>", methods=["POST"])
 def driver_delete(driver_id):
     driver_obj = Driver.query.get(driver_id)
     if driver_obj is not None:
