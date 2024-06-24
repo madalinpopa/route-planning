@@ -16,6 +16,10 @@
 
 <script src="{{ url_for('static',filename='js/htmx.min.js') }}"></script>
 <script src="{{ url_for('static',filename='js/alpine.min.js') }}"></script>
-
+<script>
+  document.body.addEventListener('htmx:configRequest', function(evt) {
+    evt.detail.headers['X-CSRFToken'] = "{{ csrf_token() }}";
+});
+</script>
 </body>
 </html>
