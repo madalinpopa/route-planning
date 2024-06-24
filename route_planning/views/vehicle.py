@@ -10,7 +10,7 @@ vehicle = Blueprint("vehicle", __name__, url_prefix="/vehicle")
 @vehicle.route("/list", methods=["GET"])
 def vehicle_list():
     page = request.args.get("page", 1, type=int)
-    pagination = Vehicle.query.paginate(
+    pagination = Vehicle.query.order_by(Vehicle.created_at.desc()).paginate(
         page=page, per_page=current_app.config["ITEMS_PER_PAGE"], error_out=False
     )
     vehicles = pagination.items
