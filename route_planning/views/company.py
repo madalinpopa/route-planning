@@ -13,8 +13,6 @@ def details():
         new_company = Company(vat="123456789", name="Company Name")
         db.session.add(new_company)
         db.session.commit()
-    if request.headers.get("HX-Request") == "true":
-        return render_template("company/partials/details.html", company=default_company)
     return render_template("company/details.html", company=default_company)
 
 
