@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField
-from wtforms.validators import DataRequired, Email
+from wtforms import StringField, TextAreaField, SelectField
+from wtforms.validators import DataRequired, Email, ValidationError
 
 
 class LoginForm(FlaskForm):
@@ -11,7 +11,7 @@ class LoginForm(FlaskForm):
 class UserRegistrationForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
     password = StringField("Password", validators=[DataRequired()])
-    email = StringField("Email", validators=[Email()])
+    email = StringField("Email", validators=[DataRequired(), Email()])
 
 
 class CompanyForm(FlaskForm):
@@ -31,8 +31,16 @@ class VehicleForm(FlaskForm):
     plate = StringField("Plate", validators=[DataRequired()])
     brand = StringField("Brand", validators=[DataRequired()])
     model = StringField("Model", validators=[DataRequired()])
-    combustible = StringField("Combustible", validators=[DataRequired()])
+    combustible = SelectField(
+        "Combustible", choices=("Motorina", "Benzina"), validators=[DataRequired()]
+    )
     consumption = StringField("Consumption", validators=[DataRequired()])
+
+    def validate_consumption(self, field):
+        try:
+            float(field.data)
+        except ValueError:
+            raise ValidationError("Consumption must be a number")
 
 
 class RouteForm(FlaskForm):
