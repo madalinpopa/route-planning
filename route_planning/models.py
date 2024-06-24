@@ -1,4 +1,5 @@
-from sqlalchemy import Integer, String, Float, Date
+from datetime import datetime
+from sqlalchemy import Integer, String, Float, Date, DateTime
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Mapped, mapped_column
 from route_planning import db
@@ -37,8 +38,16 @@ class Driver(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     name: Mapped[str] = mapped_column(String, nullable=False)
     surname: Mapped[str] = mapped_column(String, nullable=False)
+    email: Mapped[str] = mapped_column(String, nullable=True)
+    phone: Mapped[str] = mapped_column(String, nullable=True)
     company_id: Mapped[int] = mapped_column(
         Integer, db.ForeignKey("companies.id"), nullable=False
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime, nullable=False, default=datetime.utcnow
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime, nullable=True, default=datetime.utcnow, onupdate=datetime.utcnow
     )
 
     routes = db.relationship("Route", backref="driver")
@@ -70,6 +79,13 @@ class Vehicle(db.Model):
     company_id: Mapped[int] = mapped_column(
         Integer, db.ForeignKey("companies.id"), nullable=False
     )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime, nullable=False, default=datetime.utcnow
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime, nullable=True, default=datetime.utcnow, onupdate=datetime.utcnow
+    )
+
     routes = db.relationship("Route", backref="vehicle")
 
     def __repr__(self):
@@ -97,6 +113,12 @@ class Route(db.Model):
     start_from: Mapped[str] = mapped_column(String, nullable=False)
     end_to: Mapped[str] = mapped_column(String, nullable=False)
     distance: Mapped[float] = mapped_column(Float, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime, nullable=False, default=datetime.utcnow
+    )
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime, nullable=True, default=datetime.utcnow, onupdate=datetime.utcnow
+    )
 
     driver_id: Mapped[int] = mapped_column(
         Integer, db.ForeignKey("drivers.id"), nullable=False
