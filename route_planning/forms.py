@@ -2,6 +2,8 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SelectField
 from wtforms.validators import DataRequired, Email, ValidationError
 
+from .models import Vehicle
+
 
 class LoginForm(FlaskForm):
     username = StringField("Username", validators=[DataRequired()])
@@ -35,6 +37,11 @@ class VehicleForm(FlaskForm):
         "Combustible", choices=("Motorina", "Benzina"), validators=[DataRequired()]
     )
     consumption = StringField("Consumption", validators=[DataRequired()])
+
+    def validate_plate(self, field):
+        plate = Vehicle.query.filter_by(plate=field.data).first()
+        if plate:
+            raise ValidationError("Plate already exists")
 
     def validate_consumption(self, field):
         try:
