@@ -10,6 +10,7 @@ from sqlalchemy.orm import DeclarativeBase
 from .config import config
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect
+from flask_caching import Cache
 
 
 class Base(DeclarativeBase):
@@ -19,6 +20,7 @@ class Base(DeclarativeBase):
 db = SQLAlchemy(model_class=Base)
 migrate = Migrate()
 csrf = CSRFProtect()
+cache = Cache()
 
 user_cli = AppGroup("user")
 
@@ -38,6 +40,14 @@ def create_app(test_config=None):
 
     db.init_app(app)
     csrf.init_app(app)
+    cache.init_app(
+        app,
+        config={
+            "CACHE_TYPE": "MemcachedCache",
+            "CACHE_DEFAULT_TIMEOUT": app.config["CACHE_DEFAULT_TIMEOUT"],
+            "CACHE_MEMCACHED_SERVERS": app.config["CACHE_MEMCACHED_SERVERS"],
+        },
+    )
 
     with app.app_context():
         db.create_all()
