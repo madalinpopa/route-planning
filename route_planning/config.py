@@ -5,8 +5,14 @@ class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY") or "dev"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ITEMS_PER_PAGE = 5
+
+    # cache
     CACHE_DEFAULT_TIMEOUT = 300
     CACHE_MEMCACHED_SERVERS = (os.environ.get("CACHE_MEMCACHED_SERVERS"),)
+
+    # internationalization
+    BABEL_DEFAULT_LOCALE = "ro"
+    BABEL_DEFAULT_TIMEZONE = "UTC"
 
 
 class DevelopmentConfig(Config):
