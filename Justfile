@@ -8,13 +8,13 @@ export FLASK_APP := "route_planning"
 #  Custom Flask commands
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
-create_user username email password:
+create-user username email password:
     flask user create {{ username }} {{ email }} {{ password }}
 
-delete_user username:
+delete-user username:
     flask user delete {{ username }}
 
-list_users:
+list-users:
     flask user list
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -39,3 +39,19 @@ run:
 
 tailwindcss:
     npm run tailwindcss-watch
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+#  Translation commands
+# - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+translate:
+    pybabel extract -F babel.cfg -k lazy_gettext -o messages.pot .
+
+init-lang lang=ro:
+    pybabel init -i messages.pot -d translations -l {{ lang }}
+
+compile-lang:
+    pybabel compile -d translations
+
+update-lang:
+    pybabel update -i messages.pot -d translations
