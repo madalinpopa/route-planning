@@ -6,7 +6,7 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ITEMS_PER_PAGE = 5
     CACHE_DEFAULT_TIMEOUT = 300
-    CACHE_MEMCACHED_SERVERS = ("localhost:11211",)
+    CACHE_MEMCACHED_SERVERS = (os.environ.get("CACHE_MEMCACHED_SERVERS"),)
 
 
 class DevelopmentConfig(Config):
