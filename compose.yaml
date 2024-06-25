@@ -12,6 +12,21 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
+    networks:
+      - app-network
+
+  memcached:
+    image: memcached:1.6
+    command: memcached -m 256
+    restart: always
+    ports:
+      - "11211:11211"
+    networks:
+      - app-network
 
 volumes:
   postgres_data:
+
+networks:
+  app-network:
+    driver: bridge

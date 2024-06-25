@@ -5,9 +5,12 @@ class Config:
     SECRET_KEY = os.environ.get("SECRET_KEY") or "dev"
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     ITEMS_PER_PAGE = 5
+    CACHE_DEFAULT_TIMEOUT = 300
+    CACHE_MEMCACHED_SERVERS = (os.environ.get("CACHE_MEMCACHED_SERVERS"),)
 
 
 class DevelopmentConfig(Config):
+    DEBUG = True
     DB_USER = os.environ.get("DB_USER")
     DB_NAME = os.environ.get("DB_NAME")
     DB_PASS = os.environ.get("DB_PASS")
@@ -19,6 +22,7 @@ class DevelopmentConfig(Config):
 
 
 class ProductionConfig(Config):
+    DEBUG = False
     DB_USER = os.environ.get("DB_USER")
     DB_NAME = os.environ.get("DB_NAME")
     DB_PASSWORD = os.environ.get("DB_PASSWORD")

@@ -90,7 +90,7 @@
 
     <!-- Pagination -->
     {% if pagination.pages > 1 %}
-    {% with pagination=pagination %}
+    {% with pagination=pagination, page_content="vehicle-page" %}
     {% include "_pagination.html" %}
     {% endwith %}
     {% endif %}
