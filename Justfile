@@ -47,7 +47,7 @@ tailwindcss:
 translate:
     pybabel extract -F babel.cfg -k lazy_gettext -o messages.pot .
 
-init-lang lang=ro:
+init-lang lang:
     pybabel init -i messages.pot -d translations -l {{ lang }}
 
 compile-lang:

@@ -1,4 +1,4 @@
-from datetime import datetime
+import datetime
 from sqlalchemy import Integer, String, Float, Date, DateTime
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Mapped, mapped_column
@@ -43,11 +43,14 @@ class Driver(db.Model):
     company_id: Mapped[int] = mapped_column(
         Integer, db.ForeignKey("companies.id"), nullable=False
     )
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime, nullable=False, default=datetime.utcnow
+    created_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime, nullable=False, default=datetime.datetime.now(datetime.UTC)
     )
-    updated_at: Mapped[datetime] = mapped_column(
-        DateTime, nullable=True, default=datetime.utcnow, onupdate=datetime.utcnow
+    updated_at: Mapped[datetime.datetime] = mapped_column(
+        DateTime,
+        nullable=True,
+        default=datetime.datetime.now(datetime.UTC),
+        onupdate=datetime.datetime.now(datetime.UTC),
     )
 
     routes = db.relationship("Route", backref="driver")
@@ -80,10 +83,13 @@ class Vehicle(db.Model):
         Integer, db.ForeignKey("companies.id"), nullable=False
     )
     created_at: Mapped[datetime] = mapped_column(
-        DateTime, nullable=False, default=datetime.utcnow
+        DateTime, nullable=False, default=datetime.datetime.now(datetime.UTC)
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime, nullable=True, default=datetime.utcnow, onupdate=datetime.utcnow
+        DateTime,
+        nullable=True,
+        default=datetime.datetime.now(datetime.UTC),
+        onupdate=datetime.datetime.now(datetime.UTC),
     )
 
     routes = db.relationship("Route", backref="vehicle")
@@ -110,14 +116,16 @@ class Route(db.Model):
     date: Mapped[str] = mapped_column(Date, nullable=False)
     start_km: Mapped[float] = mapped_column(Float, nullable=False)
     end_km: Mapped[float] = mapped_column(Float, nullable=False)
-    start_from: Mapped[str] = mapped_column(String, nullable=False)
-    end_to: Mapped[str] = mapped_column(String, nullable=False)
-    distance: Mapped[float] = mapped_column(Float, nullable=False)
+    start_address: Mapped[str] = mapped_column(String, nullable=False)
+    end_address: Mapped[str] = mapped_column(String, nullable=False)
     created_at: Mapped[datetime] = mapped_column(
-        DateTime, nullable=False, default=datetime.utcnow
+        DateTime, nullable=False, default=datetime.datetime.now(datetime.UTC)
     )
     updated_at: Mapped[datetime] = mapped_column(
-        DateTime, nullable=True, default=datetime.utcnow, onupdate=datetime.utcnow
+        DateTime,
+        nullable=True,
+        default=datetime.datetime.now(datetime.UTC),
+        onupdate=datetime.datetime.now(datetime.UTC),
     )
 
     driver_id: Mapped[int] = mapped_column(
