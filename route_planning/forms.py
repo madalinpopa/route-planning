@@ -51,13 +51,10 @@ class VehicleForm(FlaskForm):
 
 
 class RouteForm(FlaskForm):
-    start = StringField("Start", validators=[DataRequired()])
-    end = StringField("End", validators=[DataRequired()])
-    distance = StringField("Distance", validators=[DataRequired()])
-    price = StringField("Price", validators=[DataRequired()])
     date = StringField("Date", validators=[DataRequired()])
-    time = StringField("Time", validators=[DataRequired()])
-    status = StringField("Status", validators=[DataRequired()])
-    driver = StringField("Driver", validators=[DataRequired()])
-    vehicle = StringField("Vehicle", validators=[DataRequired()])
-    notes = StringField("Notes", validators=[DataRequired()])
+    start_address = StringField("Start address", validators=[DataRequired()])
+    start_km = StringField("Start km", validators=[DataRequired()])
+    end_address = StringField("End address", validators=[DataRequired()])
+    end_km = StringField("End km", validators=[DataRequired()])
+    vehicle = SelectField("Vehicle", validators=[DataRequired()])
+    driver = SelectField("Driver", validators=[DataRequired()])
