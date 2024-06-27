@@ -56,52 +56,34 @@
     </div>
 
     <div class="divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow">
-      <div class="px-4 py-5 sm:px-6">
+      <div class="px-4 py-5 sm:px-6 flex justify-between items-center">
         <!-- Content goes here -->
         <!-- We use less vertical padding on card headers on desktop than on body sections -->
-        <h2 class="text-xl font-medium text-gray-400">Company resources</h2>
+        <h2 class="text-xl font-medium text-gray-400">Resources</h2>
+        <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none flex gap-4">
+          <button hx-get="{{ url_for('company.edit') }}" hx-target="#company-details" hx-push-url="true"
+                  hx-select="#company-details" type="button"
+                  class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            Add Driver
+          </button>
+          <button hx-get="{{ url_for('company.edit') }}" hx-target="#company-details" hx-push-url="true"
+                  hx-select="#company-details" type="button"
+                  class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            Add Vehicle
+          </button>
+        </div>
       </div>
       <div class="px-4 py-5 sm:p-6">
-        <!--
-    This example requires some changes to your config:
-
-    ```
-    // tailwind.config.js
-    module.exports = {
-      // ...
-      plugins: [
-        // ...
-        require('@tailwindcss/forms'),
-      ],
-    }
-    ```
-  -->
         <div>
-          <div class="sm:hidden">
-            <label for="tabs" class="sr-only">Select a tab</label>
-            <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
-            <select id="tabs" name="tabs"
-                    class="block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm">
-              <option>My Account</option>
-              <option>Company</option>
-              <option selected>Team Members</option>
-              <option>Billing</option>
-            </select>
-          </div>
-          <div class="hidden sm:block">
+          <div>
             <div class="border-b border-gray-200">
               <nav class="-mb-px flex space-x-8" aria-label="Tabs">
                 <!-- Current: "border-indigo-500 text-indigo-600", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" -->
                 <a href="#"
-                   class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">My
-                  Account</a>
-                <a href="#"
-                   class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Company</a>
-                <a href="#"
                    class="whitespace-nowrap border-b-2 border-indigo-500 px-1 py-4 text-sm font-medium text-indigo-600"
-                   aria-current="page">Team Members</a>
+                   aria-current="page">Drivers</a>
                 <a href="#"
-                   class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Billing</a>
+                   class="whitespace-nowrap border-b-2 border-transparent px-1 py-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700">Vehicles</a>
               </nav>
             </div>
           </div>
