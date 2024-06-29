@@ -58,6 +58,9 @@ class Driver(db.Model):
     def __repr__(self):
         return f"<Driver {self.name} {self.surname}>"
 
+    def __str__(self):
+        return f"{self.name} {self.surname}"
+
     def save(self) -> None:
         db.session.add(self)
         db.session.commit()
@@ -68,7 +71,7 @@ class Driver(db.Model):
             db.session.commit()
         except SQLAlchemyError as e:
             db.session.rollback()
-            print(f"Error deleting vehicle: {e}")
+            print(f"Error deleting driver: {e}")
 
 
 class Vehicle(db.Model):
@@ -96,6 +99,9 @@ class Vehicle(db.Model):
 
     def __repr__(self):
         return f"<Vehicle {self.plate}>"
+
+    def __str__(self):
+        return f"{self.plate}"
 
     def save(self) -> None:
         db.session.add(self)
@@ -138,3 +144,15 @@ class Route(db.Model):
 
     def __repr__(self):
         return f"<Route {self.date}>"
+
+    def save(self) -> None:
+        db.session.add(self)
+        db.session.commit()
+
+    def delete(self) -> None:
+        try:
+            db.session.delete(self)
+            db.session.commit()
+        except SQLAlchemyError as e:
+            db.session.rollback()
+            print(f"Error deleting route: {e}")
