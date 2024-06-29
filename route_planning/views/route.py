@@ -19,23 +19,20 @@ def route_list():
 @route.route("/add", methods=["GET", "POST"])
 def route_add():
     form = RouteForm()
-    form.driver.choices = [
-        (driver.id, f"{driver.name} {driver.surname}")
-        for driver in Driver.query.order_by("name")
-    ]
-    form.vehicle.choices = [
-        vehicle.plate for vehicle in Vehicle.query.order_by("plate")
-    ]
     if request.method == "POST":
-        company = Company.query.first()
         if form.validate_on_submit():
             date = form.date.data
             start_address = form.start_address.data
             start_km = form.start_km.data
             end_address = form.end_address.data
             end_km = form.end_km.data
-            vehicle = form.vehicle.data
-            driver = form.driver.data
+            vehicle_id = form.vehicle.data
+            driver_id = form.driver.data
+
+            # Fetch the actual vehicle and driver instances
+            vehicle = Vehicle.query.get(vehicle_id)
+            driver = Driver.query.get(driver_id)
+
             route_obj = Route(
                 date=date,
                 start_address=start_address,
@@ -44,7 +41,6 @@ def route_add():
                 end_km=end_km,
                 vehicle=vehicle,
                 driver=driver,
-                company=company,
             )
             route_obj.save()
             return redirect(url_for("route.route_list"))
@@ -52,18 +48,29 @@ def route_add():
 
 
 @route.route("/edit/<int:route_id>", methods=["GET", "POST"])
-def vehicle_edit(route_id):
+def route_edit(route_id):
     route_obj = Route.query.get(route_id)
     if route_obj is None:
         return redirect(url_for("route.route_list"))
 
-    form = RouteForm(obj=route_obj)
+    form = RouteForm()
+
     if request.method == "POST":
         if form.validate_on_submit():
+            print(form.data)
+            # route_obj.date = form.date.data
+            # route_obj.start_address = form.start_address.data
+            # route_obj.start_km = form.start_km.data
+            # route_obj.end_address = form.end_address.data
+            # route_obj.end_km = form.end_km.data
+            # route_obj.driver_id = form.driver.data
+            # route_obj.vehicle_id = form.vehicle.data
             form.populate_obj(route_obj)
             route_obj.save()
             return redirect(url_for("route.route_list"))
-    return render_template("vehicle/edit.html", form=form, vehicle=route_obj)
+    elif request.method == "GET":
+        form = RouteForm(obj=route_obj)
+    return render_template("route/edit.html", form=form, route=route_obj)
 
 
 @route.route("/delete/<int:route_id>", methods=["POST"])
