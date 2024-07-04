@@ -16,6 +16,7 @@ dependencies = [
     "flask-caching==2.3.0",
     "pylibmc==1.6.3",
     "flask-babel==4.0.0",
+    "wtforms-sqlalchemy==0.4.1",
 ]
 
 [project.optional-dependencies]
