@@ -41,7 +41,7 @@
                   <thead>
                   <tr>
                     <th scope="col" class="relative px-7 sm:w-12 sm:px-6">
-                      <input type="checkbox"
+                      <input type="checkbox" id="route-all"
                              class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                     </th>
                     <th scope="col" class="min-w-[6rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
@@ -66,7 +66,7 @@
                         <!-- Selected row marker, only show when row is selected. -->
                         <!-- <div class="absolute inset-y-0 left-0 w-0.5 bg-indigo-600"></div> -->
 
-                        <input type="checkbox"
+                        <input type="checkbox" id="route-{{ route.id }}"
                                class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                       </td>
                       <!-- Selected: "text-indigo-600", Not Selected: "text-gray-900" -->
