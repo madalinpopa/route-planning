@@ -62,7 +62,7 @@ class RouteForm(FlaskForm):
         "Driver",
         query_factory=lambda: Driver.query.all(),
         allow_blank=True,
-        get_label="name",
+        get_label=lambda d: f"{d.name} {d.surname}",
     )
     vehicle = QuerySelectField(
         "Vehicle",
@@ -70,13 +70,3 @@ class RouteForm(FlaskForm):
         allow_blank=True,
         get_label="plate",
     )
-
-    # def __init__(self, *args, **kwargs):
-    #     super(RouteForm, self).__init__(*args, **kwargs)
-    #     self.vehicle.choices = [
-    #         (vehicle.id, vehicle.plate) for vehicle in Vehicle.query.order_by("plate")
-    #     ]
-    #     self.driver.choices = [
-    #         (driver.id, f"{driver.name} {driver.surname}")
-    #         for driver in Driver.query.order_by("name")
-    #     ]
