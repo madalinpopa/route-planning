@@ -53,23 +53,20 @@ def route_edit(route_id):
     if route_obj is None:
         return redirect(url_for("route.route_list"))
 
-    form = RouteForm()
+    form = RouteForm(obj=route_obj)
 
     if request.method == "POST":
         if form.validate_on_submit():
-            print(form.data)
-            # route_obj.date = form.date.data
-            # route_obj.start_address = form.start_address.data
-            # route_obj.start_km = form.start_km.data
-            # route_obj.end_address = form.end_address.data
-            # route_obj.end_km = form.end_km.data
-            # route_obj.driver_id = form.driver.data
-            # route_obj.vehicle_id = form.vehicle.data
-            form.populate_obj(route_obj)
+            route_obj.date = form.date.data
+            route_obj.start_address = form.start_address.data
+            route_obj.start_km = form.start_km.data
+            route_obj.end_address = form.end_address.data
+            route_obj.end_km = form.end_km.data
+            route_obj.driver = form.driver.data
+            route_obj.vehicle = form.vehicle.data
             route_obj.save()
+            print("After updating object", route_obj.driver, route_obj.vehicle)
             return redirect(url_for("route.route_list"))
-    elif request.method == "GET":
-        form = RouteForm(obj=route_obj)
     return render_template("route/edit.html", form=form, route=route_obj)
 
 
