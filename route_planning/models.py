@@ -1,5 +1,5 @@
 import datetime
-from sqlalchemy import Integer, String, Float, Date, DateTime
+from sqlalchemy import Integer, String, Float, Date, DateTime, Time, Enum
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Mapped, mapped_column
 from route_planning import db
@@ -81,7 +81,12 @@ class Vehicle(db.Model):
     brand: Mapped[str] = mapped_column(String, nullable=False)
     model: Mapped[str] = mapped_column(String, nullable=False)
     combustible: Mapped[str] = mapped_column(String, nullable=False)
-    consumption: Mapped[float] = mapped_column(Float, nullable=False)
+    consumption_mixt: Mapped[float] = mapped_column(Float, nullable=False)
+    consumption_urban: Mapped[float] = mapped_column(Float, nullable=False)
+    consumption_extra_urban: Mapped[float] = mapped_column(Float, nullable=False)
+    category: Mapped[str] = mapped_column(
+        Enum("M1", "M2", "M3", name="category"), default="M1", nullable=True
+    )
     company_id: Mapped[int] = mapped_column(
         Integer, db.ForeignKey("companies.id"), nullable=False
     )
@@ -120,10 +125,19 @@ class Route(db.Model):
     __tablename__ = "routes"
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     date: Mapped[str] = mapped_column(Date, nullable=False)
+    start_time: Mapped[str] = mapped_column(Time, nullable=True)
+    end_time: Mapped[str] = mapped_column(Time, nullable=True)
     start_km: Mapped[float] = mapped_column(Float, nullable=False)
     end_km: Mapped[float] = mapped_column(Float, nullable=False)
     start_address: Mapped[str] = mapped_column(String, nullable=False)
     end_address: Mapped[str] = mapped_column(String, nullable=False)
+    route_reason: Mapped[str] = mapped_column(String, nullable=True)
+    route_type: Mapped[str] = mapped_column(
+        Enum("Urban", "Mixt", "Extra Urban", name="route_type"),
+        default="Urban",
+        nullable=True,
+    )
+
     created_at: Mapped[datetime] = mapped_column(
         DateTime, nullable=False, default=datetime.datetime.now(datetime.UTC)
     )

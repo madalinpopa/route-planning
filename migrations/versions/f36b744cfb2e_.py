@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 51b0b12cd905
-Revises: ffa476fa4b1d
-Create Date: 2024-06-23 17:33:01.812809
+Revision ID: f36b744cfb2e
+Revises: 
+Create Date: 2024-07-05 08:17:59.043620
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '51b0b12cd905'
-down_revision = 'ffa476fa4b1d'
+revision = 'f36b744cfb2e'
+down_revision = None
 branch_labels = None
 depends_on = None
 
@@ -26,11 +26,24 @@ def upgrade():
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('vat')
     )
+    op.create_table('users',
+    sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('username', sa.String(), nullable=False),
+    sa.Column('email', sa.String(), nullable=False),
+    sa.Column('password', sa.String(), nullable=False),
+    sa.PrimaryKeyConstraint('id'),
+    sa.UniqueConstraint('email'),
+    sa.UniqueConstraint('username')
+    )
     op.create_table('drivers',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('surname', sa.String(), nullable=False),
+    sa.Column('email', sa.String(), nullable=True),
+    sa.Column('phone', sa.String(), nullable=True),
     sa.Column('company_id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['company_id'], ['companies.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -40,8 +53,13 @@ def upgrade():
     sa.Column('brand', sa.String(), nullable=False),
     sa.Column('model', sa.String(), nullable=False),
     sa.Column('combustible', sa.String(), nullable=False),
-    sa.Column('consumption', sa.Float(), nullable=False),
+    sa.Column('consumption_mixt', sa.Float(), nullable=False),
+    sa.Column('consumption_urban', sa.Float(), nullable=False),
+    sa.Column('consumption_extra_urban', sa.Float(), nullable=False),
+    sa.Column('category', sa.Enum('M1', 'M2', 'M3', name='category'), nullable=True),
     sa.Column('company_id', sa.Integer(), nullable=False),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['company_id'], ['companies.id'], ),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('plate')
@@ -49,11 +67,16 @@ def upgrade():
     op.create_table('routes',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('date', sa.Date(), nullable=False),
+    sa.Column('start_time', sa.Time(), nullable=True),
+    sa.Column('end_time', sa.Time(), nullable=True),
     sa.Column('start_km', sa.Float(), nullable=False),
     sa.Column('end_km', sa.Float(), nullable=False),
-    sa.Column('start_from', sa.String(), nullable=False),
-    sa.Column('end_to', sa.String(), nullable=False),
-    sa.Column('distance', sa.Float(), nullable=False),
+    sa.Column('start_address', sa.String(), nullable=False),
+    sa.Column('end_address', sa.String(), nullable=False),
+    sa.Column('route_reason', sa.String(), nullable=True),
+    sa.Column('route_type', sa.Enum('Urban', 'Mixt', 'Extra Urban', name='route_type'), nullable=True),
+    sa.Column('created_at', sa.DateTime(), nullable=False),
+    sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.Column('driver_id', sa.Integer(), nullable=False),
     sa.Column('vehicle_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['driver_id'], ['drivers.id'], ),
@@ -68,5 +91,6 @@ def downgrade():
     op.drop_table('routes')
     op.drop_table('vehicles')
     op.drop_table('drivers')
+    op.drop_table('users')
     op.drop_table('companies')
     # ### end Alembic commands ###
