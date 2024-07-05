@@ -11,6 +11,7 @@ class User(db.Model):
     username: Mapped[str] = mapped_column(String, unique=True)
     email: Mapped[str] = mapped_column(String, unique=True)
     password: Mapped[str] = mapped_column(String)
+    companies = db.relationship("Company", backref="user")
 
     def __repr__(self):
         return f"<User {self.username}>"
@@ -24,6 +25,9 @@ class Company(db.Model):
     address: Mapped[str] = mapped_column(String, nullable=True)
     drivers = db.relationship("Driver", backref="company")
     vehicles = db.relationship("Vehicle", backref="company")
+    user_id: Mapped[int] = mapped_column(
+        Integer, db.ForeignKey("users.id"), nullable=False
+    )
 
     def __repr__(self):
         return f"<Company {self.name}>"
