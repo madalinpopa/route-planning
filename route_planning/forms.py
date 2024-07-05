@@ -1,5 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, TextAreaField, SelectField, DateField, IntegerField
+from wtforms import (
+    StringField,
+    TextAreaField,
+    SelectField,
+    DateField,
+    IntegerField,
+    TimeField,
+)
 from wtforms.validators import DataRequired, Email, ValidationError
 from wtforms_sqlalchemy.fields import QuerySelectField
 
@@ -36,9 +43,21 @@ class VehicleForm(FlaskForm):
     brand = StringField("Brand", validators=[DataRequired()])
     model = StringField("Model", validators=[DataRequired()])
     combustible = SelectField(
-        "Combustible", choices=("Motorina", "Benzina"), validators=[DataRequired()]
+        "Combustible",
+        choices=(("Motorina", "Motorina"), ("Benzina", "Benzina")),
+        validators=[DataRequired()],
     )
-    consumption = StringField("Consumption", validators=[DataRequired()])
+    consumption_mixt = IntegerField("Consumption Mixt", validators=[DataRequired()])
+    consumption_urban = IntegerField("Consumption Urban", validators=[DataRequired()])
+    consumption_extra_urban = IntegerField(
+        "Consumption Extra Urban", validators=[DataRequired()]
+    )
+    category = SelectField(
+        "Category",
+        choices=(("M1", "M1"), ("M2", "M2"), ("M3", "M3")),
+        default="M1",
+        validators=[DataRequired()],
+    )
 
     def validate_plate(self, field):
         plate = Vehicle.query.filter_by(plate=field.data).first()
@@ -54,10 +73,19 @@ class VehicleForm(FlaskForm):
 
 class RouteForm(FlaskForm):
     date = DateField("Date", validators=[DataRequired()])
+    start_time = TimeField("Start time", validators=[DataRequired()])
+    end_time = TimeField("End time", validators=[DataRequired()])
     start_address = StringField("Start address", validators=[DataRequired()])
     start_km = IntegerField("Start km", validators=[DataRequired()])
     end_address = StringField("End address", validators=[DataRequired()])
     end_km = IntegerField("End km", validators=[DataRequired()])
+    route_reason = TextAreaField("Route reason")
+    route_type = SelectField(
+        "Route type",
+        choices=(("Urban", "Urban"), ("Mixt", "Mixt"), ("Extra Urban", "Extra Urban")),
+        default="Urban",
+        validators=[DataRequired()],
+    )
     driver = QuerySelectField(
         "Driver",
         query_factory=lambda: Driver.query.all(),
