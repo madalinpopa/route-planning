@@ -1,22 +1,29 @@
-from flask import Blueprint, render_template, request, redirect, url_for
+from flask import Blueprint, render_template, request, redirect, url_for, g
 from ..models import Company
 from ..forms import CompanyForm
 from .. import db
+from .auth import login_required
 
 company = Blueprint("company", __name__, url_prefix="/company")
 
 
 @company.route("/details", methods=["GET"])
+@login_required
 def details():
-    default_company = Company.query.first()
-    if default_company is None:
-        new_company = Company(vat="123456789", name="Company Name")
+    # Get all companies for the current user
+    user_companies = Company.query.filter_by(user_id=g.user.id).all()
+    if not user_companies:
+        # Create a default company for the user if they don't have any
+        new_company = Company(
+            vat="123456789", name="Default Company", user_id=g.user.id
+        )
         db.session.add(new_company)
         db.session.commit()
-    return render_template("company/details.html", company=default_company)
+    return render_template("company/details.html", company=new_company)
 
 
 @company.route("/edit", methods=["GET", "POST"])
+@login_required
 def edit():
     default_company = Company.query.first()
     form = CompanyForm(obj=default_company)
