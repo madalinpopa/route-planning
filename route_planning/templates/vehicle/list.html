@@ -47,8 +47,11 @@
                     </th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Brand</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Model</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Category</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Combustible</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Consumption</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Consumption Mixt</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Consumption Urban</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Consumption Extra Urban</th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-3">
                       <span class="sr-only">Edit</span>
                     </th>
@@ -70,8 +73,11 @@
                     <td class="whitespace-nowrap py-4 pr-3 text-sm font-medium text-gray-900">{{ vehicle.plate }}</td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ vehicle.brand }}</td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ vehicle.model }}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ vehicle.category }}</td>
                     <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ vehicle.combustible }}</td>
-                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ vehicle.consumption }}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ vehicle.consumption_mixt }}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ vehicle.consumption_urban }}</td>
+                    <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ vehicle.consumption_extra_urban }}</td>
                     <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                       <a hx-get="{{ url_for('vehicle.vehicle_edit', vehicle_id=vehicle.id) }}" hx-target="#vehicle-page" hx-select="#vehicle-page" hx-push-url="true"
                         class="text-indigo-600 hover:text-indigo-900">Edit<span class="sr-only">, {{ vehicle.plate
