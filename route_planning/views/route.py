@@ -1,12 +1,14 @@
 from flask import Blueprint, render_template, request, current_app, redirect, url_for
 
-from ..models import Route, Company, Driver, Vehicle
+from ..models import Route, Driver, Vehicle
 from ..forms import RouteForm
+from .auth import login_required
 
 route = Blueprint("route", __name__, url_prefix="/route")
 
 
 @route.route("/list")
+@login_required
 def route_list():
     page = request.args.get("page", 1, type=int)
     pagination = Route.query.order_by(Route.created_at.desc()).paginate(
@@ -17,6 +19,7 @@ def route_list():
 
 
 @route.route("/add", methods=["GET", "POST"])
+@login_required
 def route_add():
     form = RouteForm()
     if request.method == "POST":
@@ -48,6 +51,7 @@ def route_add():
 
 
 @route.route("/edit/<int:route_id>", methods=["GET", "POST"])
+@login_required
 def route_edit(route_id):
     route_obj = Route.query.get(route_id)
     if route_obj is None:
@@ -71,6 +75,7 @@ def route_edit(route_id):
 
 
 @route.route("/delete/<int:route_id>", methods=["POST"])
+@login_required
 def route_delete(route_id):
     route_obj = Route.query.get(route_id)
     if route_obj is not None:

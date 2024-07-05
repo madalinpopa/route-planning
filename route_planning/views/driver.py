@@ -2,11 +2,13 @@ from flask import Blueprint, current_app, redirect, render_template, request, ur
 
 from ..models import Company, Driver
 from ..forms import DriverForm
+from .auth import login_required
 
 driver = Blueprint("driver", __name__, url_prefix="/driver")
 
 
 @driver.route("/list")
+@login_required
 def driver_list():
     page = request.args.get("page", 1, type=int)
     pagination = Driver.query.order_by(Driver.created_at.desc()).paginate(
@@ -17,6 +19,7 @@ def driver_list():
 
 
 @driver.route("/add", methods=["GET", "POST"])
+@login_required
 def driver_add():
     form = DriverForm()
     company = Company.query.first()
@@ -34,6 +37,7 @@ def driver_add():
 
 
 @driver.route("/edit/<int:driver_id>", methods=["GET", "POST"])
+@login_required
 def driver_edit(driver_id):
     driver_obj = Driver.query.get(driver_id)
     if driver_obj is None:
@@ -49,6 +53,7 @@ def driver_edit(driver_id):
 
 
 @driver.route("/delete/<int:driver_id>", methods=["POST"])
+@login_required
 def driver_delete(driver_id):
     driver_obj = Driver.query.get(driver_id)
     if driver_obj is not None:
