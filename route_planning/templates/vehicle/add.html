@@ -1,4 +1,5 @@
 {% extends "index.html" %}
+{% from "vehicle/_form.html" import render_form %}
 
 {% block page_content %}
 
@@ -27,113 +28,7 @@
             <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
               <div id="vehicle-page-content" class="relative">
 
-                <form class="divide-y divide-gray-100" id="vehicle-add-form">
-
-                  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                    <label for="plate"
-                           class="block text-sm font-medium leading-6 text-gray-900">{{ form.plate.label }}</label>
-                    <div class="mt-2">
-                      {{ form.plate(id="plate", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
-                      {% if form.plate.errors %}
-                        {% for error in form.plate.errors %}
-                          <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
-                        {% endfor %}
-                      {% endif %}
-                    </div>
-                  </div>
-
-                  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                    <label for="brand"
-                           class="block text-sm font-medium leading-6 text-gray-900">{{ form.brand.label }}</label>
-                    <div class="mt-2">
-                      {{ form.brand(id="brand", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
-                      {% if form.brand.errors %}
-                        {% for error in form.brand.errors %}
-                          <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
-                        {% endfor %}
-                      {% endif %}
-                    </div>
-                  </div>
-
-                  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                    <label for="model"
-                           class="block text-sm font-medium leading-6 text-gray-900">{{ form.model.label }}</label>
-                    <div class="mt-2">
-                      {{ form.model(id="model", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
-                      {% if form.model.errors %}
-                        {% for error in form.model.errors %}
-                          <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
-                        {% endfor %}
-                      {% endif %}
-                    </div>
-                  </div>
-
-                  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                    <label for="category"
-                           class="block text-sm font-medium leading-6 text-gray-900">{{ form.category.label }}</label>
-                    <div class="mt-2">
-                      {{ form.category(id="model", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
-                      {% if form.category.errors %}
-                        {% for error in form.category.errors %}
-                          <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
-                        {% endfor %}
-                      {% endif %}
-                    </div>
-                  </div>
-
-                  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                    <label for="combustible"
-                           class="block text-sm font-medium leading-6 text-gray-900">{{ form.combustible.label }}</label>
-                    <div class="mt-2">
-                      {{ form.combustible(id="combustible", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
-                      {% if form.combustible.errors %}
-                        {% for error in form.combustible.errors %}
-                          <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
-                        {% endfor %}
-                      {% endif %}
-                    </div>
-                  </div>
-
-                  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                    <label for="consumption_mixt"
-                           class="block text-sm font-medium leading-6 text-gray-900">{{ form.consumption_mixt.label }}</label>
-                    <div class="mt-2">
-                      {{ form.consumption_mixt(id="consumption_mixt", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
-                      {% if form.consumption_mixt.errors %}
-                        {% for error in form.consumption_mixt.errors %}
-                          <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
-                        {% endfor %}
-                      {% endif %}
-                    </div>
-                  </div>
-
-                  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                    <label for="consumption_urban"
-                           class="block text-sm font-medium leading-6 text-gray-900">{{ form.consumption_urban.label }}</label>
-                    <div class="mt-2">
-                      {{ form.consumption_urban(id="consumption_urban", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
-                      {% if form.consumption_urban.errors %}
-                        {% for error in form.consumption_urban.errors %}
-                          <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
-                        {% endfor %}
-                      {% endif %}
-                    </div>
-                  </div>
-
-                  <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
-                    <label for="consumption_extra_urban"
-                           class="block text-sm font-medium leading-6 text-gray-900">{{ form.consumption_extra_urban.label }}</label>
-                    <div class="mt-2">
-                      {{ form.consumption_extra_urban(id="consumption_extra_urban", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
-                      {% if form.consumption_extra_urban.errors %}
-                        {% for error in form.consumption_extra_urban.errors %}
-                          <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
-                        {% endfor %}
-                      {% endif %}
-                    </div>
-                  </div>
-
-                </form>
+                {{ render_form(form, "vehicle-add-form") }}
 
               </div>
             </div>
