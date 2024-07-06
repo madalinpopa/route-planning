@@ -1,0 +1,195 @@
+{% macro render_form(form, form_id) %}
+  <form class="divide-y divide-gray-100" id="{{ form_id }}">
+
+    <!-- Route details -->
+    <div class="space-y-2 py-6 px-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0 w-full">
+
+      <p class="block text-sm font-medium leading-6 text-gray-900">Route details</p>
+
+      <div class="flex flex-col sm:flex-row sm:gap-6 sm:px-0 sm:col-span-3 2xl:col-span-2">
+        <div class="py-6 w-full sm:max-w-md">
+          <label for="date"
+                 class="block text-sm font-medium leading-6 text-gray-900">{{ form.date.label }}</label>
+          <div class="mt-2">
+            {{ form.date(id="date", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+            {% if form.date.errors %}
+              {% for error in form.date.errors %}
+                <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="py-6 w-full sm:max-w-sm">
+          <label for="route_type"
+                 class="block text-sm font-medium leading-6 text-gray-900">{{ form.route_type.label }}</label>
+          <div class="mt-2">
+            {{ form.route_type(id="route_type", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+            {% if form.route_type.errors %}
+              {% for error in form.route_type.errors %}
+                <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Route details -->
+
+    <!-- Timing -->
+    <div class="space-y-2 py-6 px-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0 w-full">
+      <p class="block text-sm font-medium leading-6 text-gray-900">Timing</p>
+
+      <div class="flex flex-col sm:flex-row sm:gap-6 sm:px-0 sm:col-span-3 2xl:col-span-2">
+
+        <div class="py-6 w-full sm:max-w-sm">
+          <label for="start_time"
+                 class="block text-sm font-medium leading-6 text-gray-900">{{ form.start_time.label }}</label>
+          <div class="mt-2">
+            {{ form.start_time(id="start_time", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+            {% if form.start_time.errors %}
+              {% for error in form.start_time.errors %}
+                <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="py-6 w-full sm:max-w-sm">
+          <label for="end_time"
+                 class="block text-sm font-medium leading-6 text-gray-900">{{ form.end_time.label }}</label>
+          <div class="mt-2">
+            {{ form.end_time(id="end_time", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+            {% if form.end_time.errors %}
+              {% for error in form.end_time.errors %}
+                <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- Timing -->
+
+    <!-- Distance -->
+    <div class="space-y-2 py-6 px-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0 w-full">
+      <p class="block text-sm font-medium leading-6 text-gray-900">Distance</p>
+
+      <div class="flex flex-col sm:flex-row sm:gap-6 sm:px-0 sm:col-span-3 2xl:col-span-2">
+
+        <div class="py-6 w-full sm:max-w-sm">
+          <label for="start_km"
+                 class="block text-sm font-medium leading-6 text-gray-900">{{ form.start_km.label }}</label>
+          <div class="mt-2">
+            {{ form.start_km(id="start_km", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+            {% if form.start_km.errors %}
+              {% for error in form.start_km.errors %}
+                <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="py-6 w-full sm:max-w-sm">
+          <label for="end_km"
+                 class="block text-sm font-medium leading-6 text-gray-900">{{ form.end_km.label }}</label>
+          <div class="mt-2">
+            {{ form.end_km(id="end_km", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+            {% if form.end_km.errors %}
+              {% for error in form.end_km.errors %}
+                <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- Distance -->
+
+    <!-- Addresses -->
+    <div class="space-y-2 py-6 px-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0 w-full">
+      <p class="block text-sm font-medium leading-6 text-gray-900">Addresses</p>
+
+      <div class="flex flex-col sm:flex-row sm:gap-6 sm:px-0 sm:col-span-3 2xl:col-span-2">
+
+        <div class="py-6 w-full sm:max-w-sm">
+          <label for="start_address"
+                 class="block text-sm font-medium leading-6 text-gray-900">{{ form.start_address.label }}</label>
+          <div class="mt-2">
+            {{ form.start_address(id="start_address", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+            {% if form.start_address.errors %}
+              {% for error in form.start_address.errors %}
+                <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="py-6 w-full sm:max-w-sm">
+          <label for="end_address"
+                 class="block text-sm font-medium leading-6 text-gray-900">{{ form.end_address.label }}</label>
+          <div class="mt-2">
+            {{ form.end_address(id="end_address", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+            {% if form.end_address.errors %}
+              {% for error in form.end_address.errors %}
+                <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <!-- Addresses -->
+
+    <!-- Vehicle and driver -->
+    <div class="space-y-2 py-6 px-4 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0 w-full">
+      <p class="block text-sm font-medium leading-6 text-gray-900">Vehicle and driver</p>
+      <div class="flex flex-col sm:flex-row sm:gap-6 sm:px-0 sm:col-span-3 2xl:col-span-2">
+        <div class="py-6 w-full sm:max-w-sm">
+          <label for="vehicle"
+                 class="block text-sm font-medium leading-6 text-gray-900">{{ form.vehicle.label }}</label>
+          <div class="mt-2">
+            {{ form.vehicle(id="vehicle", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+            {% if form.vehicle.errors %}
+              {% for error in form.vehicle.errors %}
+                <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="py-6 w-full sm:max-w-sm">
+          <label for="driver"
+                 class="block text-sm font-medium leading-6 text-gray-900">{{ form.driver.label }}</label>
+          <div class="mt-2">
+            {{ form.driver(id="driver", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+            {% if form.driver.errors %}
+              {% for error in form.driver.errors %}
+                <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+              {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Vehicle and driver -->
+
+    <!-- Route reason -->
+    <div class="px-4 py-6 sm:grid sm:grid-cols-4 sm:gap-4 sm:px-0">
+      <label for="route_reason"
+             class="block text-sm font-medium leading-6 text-gray-900">{{ form.route_reason.label }}</label>
+      <div class="mt-2 sm:col-span-3 2xl:col-span-2">
+        {{ form.route_reason(id="route_reason", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+        {% if form.route_reason.errors %}
+          {% for error in form.route_reason.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+
+  </form>
+{% endmacro %}
