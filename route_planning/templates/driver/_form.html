@@ -1,0 +1,56 @@
+{% macro render_form(form, form_id) %}
+  <form class="divide-y divide-gray-100" id="driver-add-form">
+    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <label for="name" class="block text-sm font-medium leading-6 text-gray-900">{{ form.name.label }}</label>
+      <div class="mt-2">
+        {{ form.name(id="name", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm
+                    ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                    focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+        {% if form.name.errors %}
+          {% for error in form.name.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <label for="surname" class="block text-sm font-medium leading-6 text-gray-900">{{ form.surname.label }}</label>
+      <div class="mt-2">
+        {{ form.surname(id="surname", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm
+                    ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                    focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+        {% if form.surname.errors %}
+          {% for error in form.surname.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <label for="email" class="block text-sm font-medium leading-6 text-gray-900">{{ form.email.label }}</label>
+      <div class="mt-2">
+        {{ form.email(id="email", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm
+                    ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                    focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+        {% if form.email.errors %}
+          {% for error in form.email.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+    <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
+      <label for="phone" class="block text-sm font-medium leading-6 text-gray-900">{{ form.phone.label }}</label>
+      <div class="mt-2">
+        {{ form.phone(id="phone", class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm
+                    ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset
+                    focus:ring-indigo-600 sm:text-sm sm:leading-6") }}
+        {% if form.phone.errors %}
+          {% for error in form.phone.errors %}
+            <p class="mt-2 text-sm text-red-600">{{ error }}.</p>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </form>
+{% endmacro %}
