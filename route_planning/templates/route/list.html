@@ -44,15 +44,13 @@
                       <input type="checkbox" id="route-all"
                              class="absolute left-4 top-1/2 -mt-2 h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600">
                     </th>
-                    <th scope="col" class="min-w-[6rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
+                    <th scope="col" class="min-w-[3rem] py-3.5 pr-3 text-left text-sm font-semibold text-gray-900">
                       Date
                     </th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Route Type</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Start address</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Start KM</th>
                     <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">End address</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">End KM</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Vehicle</th>
-                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Driver</th>
+                    <th scope="col" class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900">Route reason</th>
                     <th scope="col" class="relative py-3.5 pl-3 pr-4 sm:pr-3">
                       <span class="sr-only">Edit</span>
                     </th>
@@ -71,13 +69,15 @@
                       </td>
                       <!-- Selected: "text-indigo-600", Not Selected: "text-gray-900" -->
 
-                      <td class="whitespace-nowrap py-4 pr-3 text-sm font-medium text-gray-900">{{ route.date }}</td>
+                      <td class="whitespace-nowrap py-4 pr-3 text-sm font-medium text-gray-900">
+                        <a hx-get="{{ url_for('route.route_details', route_id=route.id) }}"
+                           hx-target="#route-page" hx-select="#route-page" hx-push-url="true"
+                           class="text-indigo-600 hover:text-indigo-900">{{ route.date }}</a>
+                      </td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ route.route_type }}</td>
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ route.start_address }}</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ route.start_km }}</td>
                       <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ route.end_address }}</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ route.end_km }}</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ route.vehicle }}</td>
-                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ route.driver }}</td>
+                      <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ route.route_reason }}</td>
                       <td class="whitespace-nowrap py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-3">
                         <a hx-get="{{ url_for('route.route_edit', route_id=route.id) }}"
                            hx-target="#route-page" hx-select="#route-page" hx-push-url="true"
