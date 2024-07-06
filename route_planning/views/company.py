@@ -19,7 +19,7 @@ def details():
         )
         db.session.add(new_company)
         db.session.commit()
-    return render_template("company/details.html", company=new_company)
+    return render_template("company/details.html", company=user_companies[0])
 
 
 @company.route("/edit", methods=["GET", "POST"])

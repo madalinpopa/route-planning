@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, request, current_app, redirect, url_for
 
-from ..models import Route, Driver, Vehicle
+from ..models import Route
 from ..forms import RouteForm
 from .auth import login_required
 
@@ -24,26 +24,18 @@ def route_add():
     form = RouteForm()
     if request.method == "POST":
         if form.validate_on_submit():
-            date = form.date.data
-            start_address = form.start_address.data
-            start_km = form.start_km.data
-            end_address = form.end_address.data
-            end_km = form.end_km.data
-            vehicle_id = form.vehicle.data
-            driver_id = form.driver.data
-
-            # Fetch the actual vehicle and driver instances
-            vehicle = Vehicle.query.get(vehicle_id)
-            driver = Driver.query.get(driver_id)
-
             route_obj = Route(
-                date=date,
-                start_address=start_address,
-                start_km=start_km,
-                end_address=end_address,
-                end_km=end_km,
-                vehicle=vehicle,
-                driver=driver,
+                date=form.date.data,
+                start_time=form.start_time.data,
+                end_time=form.end_time.data,
+                start_address=form.start_address.data,
+                start_km=form.start_km.data,
+                end_address=form.end_address.data,
+                end_km=form.end_km.data,
+                route_reason=form.route_reason.data,
+                route_type=form.route_type.data,
+                driver=form.driver.data,
+                vehicle=form.vehicle.data,
             )
             route_obj.save()
             return redirect(url_for("route.route_list"))
@@ -72,6 +64,15 @@ def route_edit(route_id):
             print("After updating object", route_obj.driver, route_obj.vehicle)
             return redirect(url_for("route.route_list"))
     return render_template("route/edit.html", form=form, route=route_obj)
+
+
+@route.route("/details/<int:route_id>")
+@login_required
+def route_details(route_id):
+    route_obj = Route.query.get(route_id)
+    if route_obj is None:
+        return redirect(url_for("route.route_list"))
+    return render_template("route/details.html", route=route_obj)
 
 
 @route.route("/delete/<int:route_id>", methods=["POST"])
