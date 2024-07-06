@@ -1,5 +1,5 @@
 {% macro render_form(form, form_id) %}
-  <form class="divide-y divide-gray-100" id="driver-add-form">
+  <form class="divide-y divide-gray-100" id="{{ form_id }}">
     <div class="px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0">
       <label for="name" class="block text-sm font-medium leading-6 text-gray-900">{{ form.name.label }}</label>
       <div class="mt-2">
