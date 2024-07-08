@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, g
+from flask import Blueprint, render_template, g, redirect, url_for
 from .auth import login_required
 
-from .. import db
 from ..models import Company
+from ..forms import CompanyForm
 
 main = Blueprint("main", __name__)
 
@@ -10,13 +10,9 @@ main = Blueprint("main", __name__)
 @main.route("/")
 @login_required
 def index():
+    form = CompanyForm()
     user_companies = Company.query.filter_by(user_id=g.user.id).all()
     if not user_companies:
-        new_company = Company(
-            vat="123456789", name="Default Company", user_id=g.user.id
-        )
-        db.session.add(new_company)
-        db.session.commit()
-        return render_template("index.html", company=new_company)
+        return render_template("index.html", show_company_modal=True, form=form)
     else:
-        return render_template("index.html", company=user_companies[0])
+        return redirect(url_for("company.details"))
