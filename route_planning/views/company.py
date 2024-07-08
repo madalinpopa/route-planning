@@ -1,7 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for, g
 from ..models import Company
 from ..forms import CompanyForm
-from .. import db
 from .auth import login_required
 
 company = Blueprint("company", __name__, url_prefix="/company")
@@ -13,12 +12,7 @@ def details():
     # Get all companies for the current user
     user_companies = Company.query.filter_by(user_id=g.user.id).all()
     if not user_companies:
-        # Create a default company for the user if they don't have any
-        new_company = Company(
-            vat="123456789", name="Default Company", user_id=g.user.id
-        )
-        db.session.add(new_company)
-        db.session.commit()
+        return redirect(url_for("main.index"))
     return render_template("company/details.html", company=user_companies[0])
 
 
@@ -34,3 +28,19 @@ def edit():
             return redirect(url_for("company.details"))
         print(form.errors)
     return render_template("company/edit.html", form=form)
+
+
+@company.route("/add", methods=["POST"])
+@login_required
+def add():
+    form = CompanyForm()
+    if form.validate_on_submit():
+        company_obj = Company(
+            name=form.name.data,
+            vat=form.vat.data,
+            address=form.address.data,
+            user_id=g.user.id,
+        )
+        company_obj.save()
+        return redirect(url_for("company.details"))
+    return render_template("index.html", show_company_modal=True)
