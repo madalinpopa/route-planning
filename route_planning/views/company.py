@@ -10,16 +10,19 @@ company = Blueprint("company", __name__, url_prefix="/company")
 @login_required
 def details():
     # Get all companies for the current user
-    user_companies = Company.query.filter_by(user_id=g.user.id).all()
-    if not user_companies:
+    user_company = Company.query.filter_by(user_id=g.user.id).first()
+    if not user_company:
         return redirect(url_for("main.index"))
-    return render_template("company/details.html", company=user_companies[0])
+    return render_template("company/details.html", company=user_company)
 
 
 @company.route("/edit", methods=["GET", "POST"])
 @login_required
 def edit():
-    default_company = Company.query.first()
+    default_company = Company.query.filter_by(user_id=g.user.id).first()
+    if not default_company:
+        return redirect(url_for("main.index"))
+
     form = CompanyForm(obj=default_company)
     if request.method == "POST":
         if form.validate_on_submit():
